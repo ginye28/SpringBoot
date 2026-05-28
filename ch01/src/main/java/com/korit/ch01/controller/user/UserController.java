@@ -1,6 +1,8 @@
 package com.korit.ch01.controller.user;
 
 import com.korit.ch01.controller.user.dto.UserReqCreate;
+import com.korit.ch01.controller.user.dto.UserReqList;
+import com.korit.ch01.controller.user.dto.UserReqUpdate;
 import com.korit.ch01.controller.user.dto.UserResp;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @CrossOrigin    //요청 확인
 @RequestMapping("/api/users")
@@ -82,6 +85,65 @@ public class UserController {
      */
     @PostMapping(value = "/{userId}/images", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)    //{userId} 변수
     public ResponseEntity<?> createImages(@PathVariable int userId, @RequestPart MultipartFile file) {
+        return ResponseEntity.ok(null);
+    }
+
+    /**
+     *  2. Read(Get) 조회
+     *  Get요청으로 받을 수 있는 데이터 형식
+     *  - Parameter     ->      url뒤에 ?로 시작되어지는 Key, Value들을 의미
+     */
+
+    /**
+     * http://localhost8080/api/users?username=test1234&email=test@gamil.com
+     *
+     * @return 모든 user에 대한 다건 조회
+     */
+    @GetMapping
+    public ResponseEntity<List<UserResp>> list(
+            @RequestParam(required = false) String query,
+            @RequestParam(required = false) String username,
+            @RequestParam(required = false) String email) {
+        System.out.println(query);
+        System.out.println(username);
+        System.out.println(email);
+        return ResponseEntity.ok(List.of());
+    }
+
+    @GetMapping("/dto")                 //dto랑 param 구분
+    public ResponseEntity<List<UserResp>> listByDto(UserReqList dto) {
+        System.out.println(dto.getQuery());
+        System.out.println(dto.getUsername());
+        System.out.println(dto.getEmail());
+        return ResponseEntity.ok(List.of());
+    }
+
+    /**
+     * @return 특정 userId에 대한 단건 조회
+     */
+    @GetMapping("/{userId}")
+    public ResponseEntity<UserResp> getOne(@PathVariable int userId) {
+        System.out.println(userId);
+        return ResponseEntity.ok(null);
+    }
+
+    /**
+     *  3. Update(Put, Patch) 수정
+     *  Put, Patch요청으로 받을 수 있는 데이터 형식
+     *  - JSON     ->      application/json
+     */
+
+    // update => 전체 수정(null 값이 들어온 필드에 null (빈)값으로 채움)
+    @PutMapping("/{userId}")
+    public ResponseEntity<UserResp> update(@RequestBody UserReqUpdate dto) {
+        System.out.println(dto);
+        return ResponseEntity.ok(null);
+    }
+
+    // update => 부분 수정(null 값이 들어온 필드는 수정하지 않음)
+    @PatchMapping("/{userId}")
+    public ResponseEntity<UserResp> modifyOne(@RequestBody UserReqUpdate dto) {
+        System.out.println(dto);
         return ResponseEntity.ok(null);
     }
 
