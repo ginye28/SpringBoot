@@ -1,7 +1,6 @@
 package com.korit.ch02.config;
 
-import com.korit.ch02.service.EmailSender;
-import com.korit.ch02.service.MessageSender;
+import com.korit.ch02.service.EmailService;
 import com.korit.ch02.service.NotificationService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,7 +12,7 @@ public class AppConfig {
 
     @Bean
     public MessageSender messageSender() {
-        return new EmailSender();
+        return new EmailService();
     }
 
     @Bean

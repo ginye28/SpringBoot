@@ -1,6 +1,11 @@
 package com.korit.ch02.service;
 
+import com.korit.ch02.entity.Member;
+import com.korit.ch02.entity.Product;
+import com.korit.ch02.repository.MemberRepository;
+import com.korit.ch02.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
