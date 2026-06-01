@@ -5,6 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -14,4 +16,12 @@ public class UserResp {
     private String username;
     private String name;
     private String email;
+    private List<UserResp.Role> roles;
+
+    @Data
+    @AllArgsConstructor
+    public static class Role {
+        private Long roleId;
+        private String roleName;
+    }
 }
