@@ -7,7 +7,7 @@
 <mapper namespace="com.korit.ch03.mapper.RoleMapper">
 
     <insert id="insert" parameterType="User" useGeneratedKeys="true" keyProperty="id">
-        insert into users values
+        insert into roles values
             (default, #{roleName}, now(), now())
     </insert>
     <select id="selectAll" resultType="Role">

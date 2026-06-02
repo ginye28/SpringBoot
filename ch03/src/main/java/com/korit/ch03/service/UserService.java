@@ -58,6 +58,9 @@ public class UserService {
                 .username(user.getUsername())
                 .name(user.getName())
                 .email(user.getEmail())
+                    .roles(user.getUserRoles().stream()
+                            .map(userRole -> new UserResp.Role(userRole.getRole().getId(), userRole.getRole().getRoleName()))
+                            .toList())
                 .build())
             .toList();
     }

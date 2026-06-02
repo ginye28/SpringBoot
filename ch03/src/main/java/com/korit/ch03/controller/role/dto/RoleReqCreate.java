@@ -7,6 +7,4 @@ import java.time.LocalDateTime;
 @Data
 public class RoleReqCreate {
     private String roleName;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 }
