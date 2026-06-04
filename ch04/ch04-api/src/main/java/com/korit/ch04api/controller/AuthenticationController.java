@@ -18,7 +18,6 @@ public class AuthenticationController {
 
     @PostMapping("/users")
     public ResponseEntity<ApiResponse> signUp(@RequestBody AuthUserCreateRequest dto) {
-        UserService.signUp(dto);
         return ResponseEntity.ok(ApiResponse.success());
     }
 

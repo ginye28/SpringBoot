@@ -1,6 +1,6 @@
 package com.korit.ch04api.mapper;
 
-import org.apache.catalina.User;
+import com.korit.ch04api.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
