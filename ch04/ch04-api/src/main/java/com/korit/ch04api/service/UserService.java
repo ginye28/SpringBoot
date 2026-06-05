@@ -1,4 +1,4 @@
-package com.korit.ch04api.security;
+package com.korit.ch04api.service;
 
 import com.korit.ch04api.common.Exception.DuplicatedException;
 import com.korit.ch04api.dto.AuthUserCreateRequest;
@@ -6,6 +6,7 @@ import com.korit.ch04api.dto.CreateResponse;
 import com.korit.ch04api.entity.User;
 import com.korit.ch04api.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService {
     private final UserMapper userMapper;
+    private final BCryptPasswordEncoder passwordEncoder;
 
     public CreateResponse authCreate(AuthUserCreateRequest dto) {
         User foundUser = userMapper.selectByUsername(dto.getUsername());
@@ -21,7 +23,7 @@ public class UserService {
             throw new DuplicatedException("username 필드 중복", "username", dto.getUsername());
         }
 
-        User userEntity = dto.toUser();
+        User userEntity = dto.toUser(passwordEncoder);
         userMapper.insert(userEntity);
 
         return CreateResponse.builder()
@@ -29,18 +31,4 @@ public class UserService {
                 .createdIds(List.of(userEntity.getId()))
                 .build();
     }
-
-//    public void signUp(AuthUserCreateRequest dto) {
-//        User foundUser = userMapper.selectByUsername(dto.getUsername());
-//        if (foundUser != null) {
-//            return ;
-//        }
-//        User newUser = User.builder()
-//                .username(dto.getUsername())
-//                .password(dto.getPassword())
-//                .name(dto.getName())
-//                .email(dto.getEmail())
-//                .build();
-//        UserMapper.insert(newUser);
-//    }
 }
