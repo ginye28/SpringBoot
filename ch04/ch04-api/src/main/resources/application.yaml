@@ -12,3 +12,5 @@ mybatis:
 db:
   init-status:
     - roles: false
+
+#true로 하면 roles 테이블 만들어짐

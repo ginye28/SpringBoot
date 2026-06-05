@@ -1,12 +1,18 @@
 package com.korit.ch04api.config;
 
+import com.korit.ch04api.security.JwtAuthorizationFilter;
+import com.korit.ch04api.security.RestAccessDeniedHandler;
+import com.korit.ch04api.security.RestAuthEntryPoint;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -14,15 +20,32 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.List;
 
 @Configuration
+@EnableWebSecurity  //기본 세팅 날림
+@RequiredArgsConstructor
 public class SecurityConfig {
+
+    private final JwtAuthorizationFilter jwtAuthorizationFilter;
+    private final RestAuthEntryPoint restAuthEntryPoint;
+    private final RestAccessDeniedHandler restAccessDeniedHandler;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) {
         http.csrf(csrf -> csrf.disable());
         http.cors(Customizer.withDefaults());
-        http.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));  // 무상태성 - 임시캐시, 세션 등 상태를 유지하는 것들을 사용하지 않음.
-        http.authorizeHttpRequests(req -> {                                                       // 기억을 안 함 -> 매요청이 새로움
-            req.anyRequest().permitAll();
+        http.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS));    // 무상태성 - 임시캐시, 세션 등 상태를 유지하는 것들을 사용하지 않음.
+        http.addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);   // 기억을 안 함 -> 매요청이 새로움
+        http.exceptionHandling(ex -> {
+            ex.authenticationEntryPoint(restAuthEntryPoint);
+            ex.accessDeniedHandler(restAccessDeniedHandler);
+        });
+        http.authorizeHttpRequests(req -> {
+            req.requestMatchers(
+                    "/swagger-ui/**",
+                    "/swagger-ui.html/**",
+                    "/v3/api-docs/**",
+                    "/api/auth/**"
+            ).permitAll();
+            req.anyRequest().authenticated();
         });
         return http.build();
     }

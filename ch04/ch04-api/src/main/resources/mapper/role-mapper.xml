@@ -14,5 +14,4 @@
             (default, #{role.roleName})
         </foreach>
     </insert>
-
 </mapper>
