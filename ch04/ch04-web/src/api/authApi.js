@@ -8,7 +8,7 @@ export const signUp = async (signUpData) => {
 
 //  로그인
 export const signIn = async (signInData) => {
-    const response = await axiosInstance.post("/api/auth/token", signInData);
+    const response = await axiosInstance.post("/api/auth/users/token", signInData);
     return response.data;
 }
 

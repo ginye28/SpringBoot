@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router"
-import { signUp } from "../api/authApi";
+import { signIn, signUp } from "../api/authApi";
 import { useAuthStore } from "../store/AuthStore";
 
 export function useSignUp() {
@@ -29,7 +29,7 @@ export function useSignIn() {
         mutationFn: (signInData) => signIn(signInData),
         onSuccess: (data) => {
             saveToken(data.body.accessToken);
-            queryClient.invalidateQueries();
+            queryClient.invalidateQueries();    // invalidate: 유효기간 만료    (괄호 비워두면 모두 날림)
             navigate("/");
 
         },
