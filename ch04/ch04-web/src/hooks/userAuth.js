@@ -14,7 +14,7 @@ export function useSignUp() {
 
         },
         onError: (error) => {
-            const message = error.response.data.body.message;
+            const message = error.response?.data?.body?.message || error.message || "오류가 발생했습니다.";
             alert(message);
         }
     });
@@ -34,7 +34,7 @@ export function useSignIn() {
 
         },
         onError: (error) => {
-            const message = error.response.data.body.message;
+            const message = error.response?.data?.body?.message || error.message || "오류가 발생했습니다.";
             alert(message);
         }
     }) 

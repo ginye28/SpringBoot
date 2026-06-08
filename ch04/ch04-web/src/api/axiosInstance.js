@@ -16,7 +16,7 @@ axiosInstance.interceptors.request.use((config) => {
 axiosInstance.interceptors.response.use(
     (response) => response, 
     (error) => {
-        if (error.response.status === 401) {    //401 토큰 인가 실패 
+        if (error.response?.status === 401) {    //401 토큰 인가 실패 
             localStorage.removeItem("accessToken");
             window.location.href = "/auth/signin";
         }

@@ -40,13 +40,13 @@ function SignUp() {
         username: /^[a-z][a-z0-9_]{3,19}$/,
 
         // 영문 대소문자 + 숫자 + 특수문자 각 1개 이상, 8~20자
-        password: /^(?=.*[A-Za-z])(?=.*\\d)(?=.*[!@#$%^&*])[A-Za-z\\d!@#$%^&*]{8,20}$/,
+        password: /^(?=.*[A-Za-z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,20}$/,
 
         // 한글 2~10자 또는 영문 2~30자 (공백 일부 허용)
-        name: /^[가-힣]{2,10}$|^[a-zA-Z\\s]{2,30}$/,
+        name: /^[가-힣]{2,10}$|^[a-zA-Z\s]{2,30}$/,
 
         // 표준 이메일
-        email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$/,
+        email: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
     };
     
     const emptyInputs = {
@@ -71,8 +71,12 @@ function SignUp() {
     }
 
     const handleSignUpOnClick = async () => {
-        await signUpMutation.mutateAsync(inputValues);
-        setInputValues(emptyInputs);
+        try {
+            await signUpMutation.mutateAsync(inputValues);
+            setInputValues(emptyInputs);
+        } catch (error) {
+            console.error("회원가입 에러:", error);
+        }
     }
 
     const validate = ({username, password, confirmPassword, name, email}) => {

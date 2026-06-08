@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, replace } from "react-router";
 import { css } from "@emotion/react";
 import GlassCard from "../components/GlassCard";
+import { useSignIn } from "../hooks/userAuth";
 
 const headerStyle = css`
     text-align: center;
@@ -39,8 +40,15 @@ function Signin() {
         }));
     }
 
-    const handleSignInOnClick = () => {
-        setInputValues(emptyInputValues);
+    const signInMutation = useSignIn();
+
+    const handleSignInOnClick = async () => {
+        try {
+            await signInMutation.mutateAsync(inputValues);
+            setInputValues(emptyInputValues);
+        } catch (error) {
+            console.error("로그인 에러:", error);
+        }
     }
 
     return(
