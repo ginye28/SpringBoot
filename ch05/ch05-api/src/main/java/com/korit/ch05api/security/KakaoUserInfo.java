@@ -8,7 +8,7 @@ public class KakaoUserInfo implements OAuth2UserInfo {
     private final Map<String, Object> kakaoAccount;
 
     public KakaoUserInfo(Map<String, Object> attributes) {
-        this.id = (String) attributes.get("id");
+        this.id = Long.toString((Long)attributes.get("id"));
         this.properties = (Map<String, Object>) attributes.get("properties");
         this.kakaoAccount = (Map<String, Object>) attributes.get("kakao_account");
     }
