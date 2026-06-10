@@ -33,7 +33,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         if (user == null) {
             user = User.builder()
                     .email(auth2User.getAttribute("email"))
-                    .nickname(auth2User.getAttribute("nickname"))
+                    .nickname(auth2User.getAttribute("name"))
                     .provider(auth2User.getAttribute("provider"))
                     .providerId(auth2User.getAttribute("providerId"))
                     .build();
