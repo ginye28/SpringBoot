@@ -28,9 +28,9 @@ Apple iOS의 "미리알림(Reminders)" 앱을 벤치마킹하여, 사용자가 O
 ### 2.1 기술 스택 (권장)
 | 영역 | 기술 |
 | --- | --- |
-| Frontend | React 18, Zustand(상태관리), React Router, Axios |
+| Frontend | React 19, Zustand(상태관리), React Router, Axios |
 | Backend | Spring Boot 3.x, Spring Security 6, Spring Data JPA |
-| 인증 | OAuth2 Client + JWT (Access / Refresh Token) |
+| 인증 | OAuth2 Client + JWT (Access) |
 | DB | MySQL 8.x |
 | 빌드/배포 | Gradle, Docker (선택) |
 

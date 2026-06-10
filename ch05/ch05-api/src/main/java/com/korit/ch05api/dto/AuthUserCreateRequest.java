@@ -30,10 +30,8 @@ public class AuthUserCreateRequest {
 
     public User toUser(BCryptPasswordEncoder passwordEncoder) {
         return User.builder()
-//                .username(username)
-//                .password(passwordEncoder.encode(password))
-                .name(name)
                 .email(email)
+                .name(name)
                 .roleId(roleId)
                 .build();
     }

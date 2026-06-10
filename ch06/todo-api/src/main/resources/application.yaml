@@ -15,4 +15,4 @@ db:
 
 app:
   oauth2:
-    redirect-uri: http://localhost:5173/auth/oauth2/callback
+    redirect-uri: http://localhost:5173/auth/oauth2/callbackz`
