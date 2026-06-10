@@ -1,7 +1,6 @@
 package com.korit.ch05api.security;
 
 import com.korit.ch05api.entity.User;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.jspecify.annotations.Nullable;
 import org.springframework.security.core.GrantedAuthority;
@@ -14,10 +13,14 @@ import java.util.List;
 import java.util.Map;
 
 @Data
-@AllArgsConstructor
 public class PrincipalUser implements UserDetails, OAuth2User {
     private User user;
     private OAuth2UserInfo oAuth2UserInfo;
+
+    public PrincipalUser(User user, OAuth2UserInfo oAuth2UserInfo) {
+        this.user = user;
+        this.oAuth2UserInfo = oAuth2UserInfo;
+    }
 
     @Override
     public Map<String, Object> getAttributes() {
@@ -42,6 +45,6 @@ public class PrincipalUser implements UserDetails, OAuth2User {
 
     @Override
     public String getName() {
-        return oAuth2UserInfo.getEmail();
+        return oAuth2UserInfo.getProviderId();
     }
 }

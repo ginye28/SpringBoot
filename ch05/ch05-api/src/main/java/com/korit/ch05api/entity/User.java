@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class User {
     private Long id;
-    private String name;
     private String email;
+    private String name;
     private String provider;    // google, naver, kakao
     private String providerId;  // sub, id
     private Long roleId;

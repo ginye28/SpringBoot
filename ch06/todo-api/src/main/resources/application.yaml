@@ -4,7 +4,7 @@ spring:
 
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml
-  type-aliases-package: com.korit.ch05api.entity
+  type-aliases-package: com.korit.todoapi.entity
   configuration:
     map-underscore-to-camel-case: true
     jdbc-type-for-null: 'NULL'
