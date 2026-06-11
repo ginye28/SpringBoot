@@ -7,13 +7,15 @@ public interface OAuth2UserInfo {
     String getProvider();
     String getEmail();
     String getName();
+    String getProfileImage();
 
     default Map<String, Object> getAttribute() {
         return Map.of(
                 "providerId", getProviderId(),
                 "provider", getProvider(),
                 "email", getEmail(),
-                "name", getName()
+                "name", getName(),
+                "profileImage", getProfileImage()
         );
     }
 }

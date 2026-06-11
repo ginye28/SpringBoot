@@ -13,11 +13,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -32,14 +34,14 @@ public class JwtAuthorizationFilter extends OncePerRequestFilter {
 
         if(token != null) {
             try {
-                Jws<Claims> claimsJws = jwtUtil.parseAndValidate(token);
-                Long userId = Long.valueOf(claimsJws.getPayload().getSubject());
+                Jws<Claims> claimsJws = jwtUtil.parseAndValidate(token);    //parser의 return이 jws
+                Long userId = Long.valueOf(claimsJws.getPayload().getSubject());    // payload는 토근이 담겨있는 곳(jwt.io)
 
                 User foundUser = userMapper.selectById(userId);
                 PrincipalUser principalUser = new PrincipalUser(foundUser, null);
 
                 UsernamePasswordAuthenticationToken authenticationToken
-                        =new UsernamePasswordAuthenticationToken(principalUser, "", principalUser.getAuthorities());
+                        = new UsernamePasswordAuthenticationToken(principalUser, "", principalUser.getAuthorities()); //List.of(new SimpleGrantedAuthority("ROLE_USER")) 권한
 
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             } catch (JwtException e) {
