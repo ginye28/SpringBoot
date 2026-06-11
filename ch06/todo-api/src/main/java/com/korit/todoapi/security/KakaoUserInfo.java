@@ -7,7 +7,6 @@ public class KakaoUserInfo implements OAuth2UserInfo {
     private final Map<String, Object> properties;
     private final Map<String, Object> kakaoAccount;
 
-
     public KakaoUserInfo(Map<String, Object> attributes) {
         this.id = Long.toString((Long) attributes.get("id"));
         this.properties = (Map<String, Object>) attributes.get("properties");
@@ -32,5 +31,10 @@ public class KakaoUserInfo implements OAuth2UserInfo {
     @Override
     public String getName() {
         return (String) properties.get("nickname");
+    }
+
+    @Override
+    public String getProfileImage() {
+        return "null";
     }
 }
