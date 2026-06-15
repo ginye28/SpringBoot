@@ -1,8 +1,6 @@
 spring:
   profiles:
-    include:
-      - secret
-      - db
+    include: secret
 
 mybatis:
   mapper-locations: classpath:mapper/**/*.xml   # mapper.xml파일 경로 설정

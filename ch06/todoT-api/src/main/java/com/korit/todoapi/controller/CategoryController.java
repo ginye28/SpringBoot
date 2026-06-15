@@ -11,10 +11,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/categories")
 public class CategoryController {
 
-    @GetMapping
-    public ResponseEntity<?> get(@AuthenticationPrincipal Long userId) {
+    @GetMapping("/count/completion/not")
+//    public ResponseEntity<?> get(@AuthenticationPrincipal Long userId) {
 //        Long userId = (Long) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//        return ResponseEntity.ok("카테고리 가지고 나감, userId: " + userId);
+//    }
 
-        return ResponseEntity.ok("카테고리 가지고 나감, userId: " + userId);
+    public ResponseEntity<?> notCompleted(@AuthenticationPrincipal Long userId) {
+
+        return ResponseEntity.ok(null);
     }
 }

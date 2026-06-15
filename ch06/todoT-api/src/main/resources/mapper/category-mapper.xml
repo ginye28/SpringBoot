@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.korit.todoapi.mapper.CategoryMapper">
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        insert into categories values
+        ( default, #{userId}, #{name}, #{color}, #{icon}, now() )
+    </insert>
+
+    <select id="countNotCompletedByUserId" resultType="com.korit.todoapi.entity.CategoryCompletionCount">
+        select
+            ctgr.id
+            count(*) as total_count,
+            count(if(todos.is_completed = 0, 1, null)) as not_completed_count
+        from
+            categories ctgr
+            left join todos  on todos.category_id = ctgr.id
+        where
+            ctgr.user_id = #{userId}
+        group by
+            ctgr.id
+        order by
+            ctgr.id
+    </select>
+</mapper>
