@@ -35,33 +35,7 @@
         order by
             id
     </select>
-    <select id="selectAll" resultMap="UserMap">
-        select
-            usr.id as usr_id,
-            usr.email,
-            usr.nickname,
-            usr.profile_image,
-            usr.provider,
-            usr.provider_id,
-            usr.reated_at as usr_created_at
-
-            usrl.id as usrl_id,
-            usrl.user_id,
-            usrl.category_id,
-            usrl.created-at,
-
-            ctgr.id as ctgr_id,
-            ctgr.nickname,
-            ctgr.created_at as ctgr_created_at,
-        from
-            users usr
-            inner join user
-        where
-            provider_id = #{providerId}
-        order by
-            id
-    </select>
-    <select id="selectByNickname" resultMap="UserMap">
+    <select id="selectById" resultType="com.korit.todoapi.entity.User">
         select
             id,
             email,
@@ -73,8 +47,6 @@
         from
             users
         where
-            nickname = #{nickname}
-        order by
-            id
+            id = #{userId}
     </select>
 </mapper>
