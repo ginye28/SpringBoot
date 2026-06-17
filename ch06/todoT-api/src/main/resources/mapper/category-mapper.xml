@@ -22,19 +22,20 @@
     </update>
     <delete id="delete">
         delete
+        from
             categories
         where
             id = #{id}
     </delete>
 
-    <select id="countNotCompletedByUserId" resultType="com.korit.todoapi.entity.CategoryCompletionCount">
+    <select id="countNotCompletedByUserId" resultType="CategoryCompletionCount">
         select
-            ctgr.id
+            ctgr.id,
             count(*) as total_count,
             count(if(todos.is_completed = 0, 1, null)) as not_completed_count
         from
             categories ctgr
-            left join todos  on todos.category_id = ctgr.id
+            left join todos on todos.category_id = ctgr.id
         where
             ctgr.user_id = #{userId}
         group by
@@ -70,6 +71,16 @@
             and user_id = #{userId}
     </select>
     <select id="selectAllByUserId" resultType="Category">
-
+        select
+            id,
+            user_id,
+            name,
+            color,
+            icon,
+            created_at
+        from
+            categories
+        where
+            user_id = #{userId}
     </select>
 </mapper>

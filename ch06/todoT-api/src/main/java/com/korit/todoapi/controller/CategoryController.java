@@ -3,6 +3,7 @@ package com.korit.todoapi.controller;
 import com.korit.todoapi.dto.ApiResponse;
 import com.korit.todoapi.dto.CreateResponse;
 import com.korit.todoapi.dto.category.CategoryCreateRequest;
+import com.korit.todoapi.dto.category.CategoryModifyRequest;
 import com.korit.todoapi.entity.CategoryCompletionCount;
 import com.korit.todoapi.service.CategoryService;
 import lombok.RequiredArgsConstructor;
@@ -30,13 +31,15 @@ public class CategoryController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ApiResponse<?>> modify(@PathVariable Long id, @RequestBody CategoryCreateRequest dto) {
+    public ResponseEntity<ApiResponse<?>> modify(@PathVariable Long id, @RequestBody CategoryModifyRequest dto) {
+        categoryService.modify(dto);
         return ResponseEntity.ok(ApiResponse.success("수정 완료"));
     }
 
-    @PutMapping("/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<?>> delete(@PathVariable Long id) {
-        return ResponseEntity.ok(ApiResponse.success());
+        categoryService.delete(id);
+        return ResponseEntity.ok(ApiResponse.success("삭제 완료"));
     }
 
     @GetMapping("/count/completion/not")

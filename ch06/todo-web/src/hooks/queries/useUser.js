@@ -5,8 +5,8 @@ export const useMe = () => {
     const accessToken = localStorage.getItem("accessToken");
 
     return useQuery({
-        queryKey: ["me", ],
-        queryFn: () => getMeRequest(),
+        queryKey: ["me", accessToken],
+        queryFn: getMeRequest,
         retry: 0,   //다시 시도 횟수
         staleTime: 6000 * 10,   //캐싱 시간
         gcTime: 6000 * 10,

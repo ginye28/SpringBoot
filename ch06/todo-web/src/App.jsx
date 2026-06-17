@@ -1,20 +1,31 @@
 import { Route, Routes } from "react-router";
-import { ProtectedRoutes, PublickOnlyRoute } from "./components/routes/ProtectedRoutes";
+import { ProtectedRoutes, PublicOnlyRoute } from "./components/routes/ProtectedRoutes";
 import Login from "./pages/Login/Login";
-import LoginCallback from "./LoginCallback/LoginCallback";
+import LoginCallback from "./pages/LoginCallback/LoginCallback";
+import { Global } from "@emotion/react";
+import { global } from "./styles/global";
+import RootLayout from "./components/layout/RootLayout";
+import Home from "./pages/Home/Home";
+import Register from "./pages/Register/Register";
 
 function App() {
 
-    return(
-        <Routes>
-            <Route element={<PublickOnlyRoute/>}>
-                <Route path="/auth/login" element={<Login/>} />
-                <Route path="/auth/oauth2/callback" element={<LoginCallback/>} />
-            </Route>
-            <Route element={<ProtectedRoutes/>}>
-                <Route path="/auth/login" element={<></>} />
-            </Route>
-        </Routes>
+    return (
+        <>
+            <Global styles={global} />
+            <RootLayout>
+                <Routes>
+                    <Route element={<PublicOnlyRoute />} >
+                        <Route path="/auth/login" element={<Login />}/>
+                        <Route path="/auth/oauth2/callback" element={<LoginCallback />}/>
+                    </Route>
+                    <Route element={<ProtectedRoutes />} >
+                        <Route path="/" element={<Home />} />
+                        <Route path="/register" element={<Register />} />
+                    </Route>
+                </Routes>
+            </RootLayout>
+        </>
     )
 }
 

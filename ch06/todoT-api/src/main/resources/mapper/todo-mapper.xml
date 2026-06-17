@@ -22,6 +22,8 @@
             priority = #{priority},
             is_flagged = #{isFlagged},
             updated_at = #{updatedAt}
+        where
+            id = #{id}
     </update>
     <update id="updateCompleted">
         update

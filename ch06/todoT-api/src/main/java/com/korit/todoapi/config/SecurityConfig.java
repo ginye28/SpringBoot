@@ -50,6 +50,7 @@ public class SecurityConfig {
 
         return http.build();
     }
+
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
@@ -59,13 +60,12 @@ public class SecurityConfig {
                 "http://localhost:5175",
                 "http://localhost:3000"
         ));
-        corsConfiguration.setAllowedMethods(List.of("POST", "GET", "PUT", "FATCH", "DELETE", "OPTIONS"));
-        corsConfiguration.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-Dev_Token"));
+        corsConfiguration.setAllowedMethods(List.of("POST", "GET", "PUT", "PATCH", "DELETE", "OPTIONS"));
+        corsConfiguration.setAllowedHeaders(List.of("Authorization", "Content-Type", "X-Dev-Token"));
         corsConfiguration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfiguration);
         return source;
     }
-
 }
