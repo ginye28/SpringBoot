@@ -18,6 +18,8 @@ public class TodoService {
     private final TodoMapper todoMapper;
 
     public CreateResponse create(TodoCreateRequest dto) {
+        Todo todo = dto.toTodo();
+        todoMapper.insert(todo);
         return CreateResponse.builder()
                 .domainName("todo")
                 .createdIds(List.of())

@@ -4,15 +4,6 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.korit.todoapi.mapper.UserMapper">
-<!--    <resultMap id="UserMap" type="user">-->
-<!--        <id property="id" column="usr_id" />-->
-<!--        <result property="email" column="email"/>-->
-<!--        <result property="nickname" column="nickname"/>-->
-<!--        <result property="profileImage" column="profile_image"/>-->
-<!--        <result property="provider" column="provider"/>-->
-<!--        <result property="providerId" column="provider_id"/>-->
-<!--        <result property="createdAt" column="usr_created_at"/>-->
-<!--    </resultMap>-->
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         insert into users values

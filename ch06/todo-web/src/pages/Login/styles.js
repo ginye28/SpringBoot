@@ -28,12 +28,14 @@ export const main = css`
         margin: 20px 0 10px;
         font-size: 40px;
         color: #fff;
+        cursor: default;
     }
 
     & > p {
         margin: 0;
         font-size: 15px;
         color: #ffffff73;
+        cursor: default;
     }
 `;
 

@@ -25,7 +25,6 @@ public class CategoryService {
 
     public CreateResponse create(CategoryCreateRequest dto) {
         checkDuplicated(dto.getName(), dto.getUserId());
-
         Category category = dto.toCategory();
         categoryMapper.insert(category);
 
@@ -36,7 +35,8 @@ public class CategoryService {
     }
 
     public List<CategoryResponse> getAll(Long userId) {
-        return categoryMapper.selectAllByUserId(userId).stream()
+        return categoryMapper.selectAllByUserId(userId)
+                .stream()
                 .map(Category::toResponse) //람다
                 .toList();
     }

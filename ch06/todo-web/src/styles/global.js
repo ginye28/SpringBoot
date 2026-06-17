@@ -1,7 +1,6 @@
 import { css } from "@emotion/react";
 
 export const global = css`
-
     @font-face {
         font-family: 'Pretendard';
         src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Thin.woff2') format('woff2');
@@ -66,7 +65,7 @@ export const global = css`
     }
 
     * {
-        font-family: 'Pretendard', sans-serif;  //Pretendard 적용 안 되면, 기본 폰트
+        font-family: 'Pretendard', sans-serif;
     }
 
     html, body, #root {
@@ -74,7 +73,7 @@ export const global = css`
         padding: 0;
         height: 100vh;
     }
-    
+
     body {
         background-color: #111;
         display: flex;
@@ -86,8 +85,8 @@ export const global = css`
         display: flex;
         justify-content: center;
         align-items: center;
-        box-sizing: border-box;     //스크롤 없어짐
+        box-sizing: border-box;
         padding: 24px;
-        background: linear-gradient(135deg, rgb(10, 10, 10) 0%, rgb(26, 26, 46) 100%)
+        background: linear-gradient(135deg, rgb(10, 10, 10) 0%, rgb(26, 26, 46) 100%);
     }
 `;

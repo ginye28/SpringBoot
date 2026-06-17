@@ -1,3 +1,4 @@
+import TextButton from "../../components/buttons/TextButton/TextButton";
 import Header from "../../components/Header/Header";
 import { useMe } from "../../hooks/queries/useUser";
 import * as s from "./styles";
@@ -10,7 +11,7 @@ function Home() {
         <div css={s.layout}>
             <Header>
                 <h2 css={s.title}>ReMind</h2>
-                <div css={s.profile(meQuery.data.data?.body.profileImage)}></div>
+                <div css={s.profile(meQuery.data?.body.profileImage)}></div>
             </Header>
             <div css={s.main}>
                 <div css={s.boxGroup}>

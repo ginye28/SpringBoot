@@ -15,7 +15,7 @@ export const rootHeader = css`
     justify-content: space-between; //끝에 붙여줌
     align-items: flex-end;  //밑에 붙여줌
     box-sizing: border-box;
-    padding: 0 20px 8px;
+    padding: 0 28px 8px;
     width: 100%;
     height: 50px;
 `;
@@ -38,5 +38,5 @@ export const main = css`
     display: flex;
     width: 100%;
     flex-grow: 1;
-    background-color: #dbdbdb;
+    background-color: #f2f2f7;
 `;

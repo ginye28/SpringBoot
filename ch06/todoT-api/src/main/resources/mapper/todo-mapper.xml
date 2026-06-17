@@ -7,7 +7,7 @@
 
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
-        insert into values todos
+        insert into todos values
         (default, #{userId}, #{categoryId}, #{title}, #{memo}, #{dueDate}, #{dueTime}, #{priority}, #{isFlagged}, #{isCompleted}, #{completedAt}, #{createdAt}, #{updatedAt})
     </insert>
     <update id="update">

@@ -7,7 +7,7 @@
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         insert into categories values
-        ( default, #{userId}, #{name}, #{color}, #{icon}, #{createdAt} ) <!--now()-->
+        ( default, #{userId}, #{name}, #{color}, #{icon}, #{createdAt} )
     </insert>
 
     <update id="update">

@@ -1,3 +1,5 @@
+import { css } from "@emotion/react";
+
 export const button = (weight) => css`
     border: none;
     background-color: transparent;

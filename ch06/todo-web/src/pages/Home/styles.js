@@ -17,7 +17,7 @@ export const profile = (url) => css`
     width: 34px;
     height: 34px;
     background-color: #dbdbdb;
-    background-image: url()("${url}");
+    background-image: url(${url});
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -32,7 +32,7 @@ export const main = css`
 
 export const boxGroup = css`
     height: 212px;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
 `;
 
 export const listGroup = css`
@@ -65,7 +65,7 @@ export const listGroup = css`
             cursor: pointer;
         }
 
-        & > li:not(li:ntn-last-child(1)) {
+        & > li:not(li:nth-last-child(1)) {
             border-bottom: 1px solid #f5f5f7;
             height: 61px;
         }
