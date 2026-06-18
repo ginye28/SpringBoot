@@ -2,9 +2,13 @@ import { useEffect, useState } from "react";
 import * as s from "./styles";
 import { useSpinnersStore } from "../../store/spinners";
 import Spinners from "../Spinners/Spinners";
+import { useBottomModalStore } from "../../store/modalStore";
 
 function RootLayout({ children }) {
     const isLoading = useSpinnersStore((state) => state.isLoading);
+    const isModalOpen = useBottomModalStore((state) => state.isOpen);
+    const setModalOpen = useBottomModalStore((state) => state.setOpen);
+    const modalChildren = useBottomModalStore((state) => state.children);
 
     const [ time, setTime ] = useState("00:00");
 
@@ -48,6 +52,20 @@ function RootLayout({ children }) {
                 {isLoading && <Spinners />}
                 {children}
             </div>
+            {
+                isModalOpen && (
+                    <div css={s.modalLayout} onClick={() => setModalOpen(false)}>
+                        <div onClick={(e) => e.stopPropagation()}>  {/*이벤트 전파 방지 */}
+                            <header>
+                                <div></div>
+                            </header>
+                            <main>
+                                {modalChildren}
+                            </main>
+                        </div>
+                    </div>
+                )
+            }
         </div>
     )
 }
