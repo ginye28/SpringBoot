@@ -2,6 +2,7 @@ package com.korit.todoapi.controller;
 
 import com.korit.todoapi.dto.ApiResponse;
 import com.korit.todoapi.dto.CreateResponse;
+import com.korit.todoapi.dto.category.CategoryColorsAndIconsResponse;
 import com.korit.todoapi.dto.category.CategoryCreateRequest;
 import com.korit.todoapi.dto.category.CategoryModifyRequest;
 import com.korit.todoapi.entity.CategoryCompletionCount;
@@ -45,5 +46,10 @@ public class CategoryController {
     @GetMapping("/count/completion/not")
     public ResponseEntity<ApiResponse<List<CategoryCompletionCount>>> notCompleted(@AuthenticationPrincipal Long userId) {
         return ResponseEntity.ok(ApiResponse.success(categoryService.getNotCompletedCount(userId)));
+    }
+
+    @GetMapping("/colors-icons")
+    public ResponseEntity<ApiResponse<CategoryColorsAndIconsResponse>> getColorsAndIcons() {
+        return ResponseEntity.ok(ApiResponse.success(categoryService.getColorsAndIcons()));
     }
 }

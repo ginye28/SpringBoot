@@ -1,32 +1,46 @@
+import { Link } from "react-router";
 import TextButton from "../../components/buttons/TextButton/TextButton";
 import Header from "../../components/Header/Header";
+import Spinners from "../../components/Spinners/Spinners";
+import { useCategories, useCategoryNotCompletedCount } from "../../hooks/queries/useCategory";
 import { useMe } from "../../hooks/queries/useUser";
 import * as s from "./styles";
 
 
 function Home() {
     const meQuery = useMe();
+    const categoriesQuery = useCategories();
+    const categoryNotCompletedCountQuery = useCategoryNotCompletedCount();
+
+    console.log(categoriesQuery.data);
+
+    console.log("meQuery", meQuery.data);
+    console.log("body", meQuery.data?.body);
 
     return(
         <div css={s.layout}>
             <Header>
                 <h2 css={s.title}>ReMind</h2>
-                <div css={s.profile(meQuery.data?.body.profileImage)}></div>
+                <div css={s.profile(meQuery.data?.body?.profileImage ?? "")}></div>
             </Header>
             <div css={s.main}>
                 <div css={s.boxGroup}>
-                    <div css={s.box}>
-
+                    {/* <div css={s.box}>
+                        <svg data-dc-tpl="86" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle data-dc-tpl="87" cx="8" cy="8" r="5.5" stroke="white" stroke-width="1.8"></circle><path data-dc-tpl="88" d="M8 5.5V8.5l2 1.5" stroke="white" stroke-width="1.8" stroke-linecap="round"></path></svg>
+                        <label>asdf</label>
                     </div>
                     <div css={s.box}>
-
+                        <svg data-dc-tpl="94" width="15" height="15" viewBox="0 0 15 15" fill="none"><rect data-dc-tpl="95" x="1.5" y="2.5" width="12" height="11" rx="2" stroke="white" stroke-width="1.8"></rect><path data-dc-tpl="96" d="M1.5 6.5h12M5 1.5v3M10 1.5v3" stroke="white" stroke-width="1.8" stroke-linecap="round"></path></svg>
+                        <label>asdf</label>
                     </div>
                     <div css={s.box}>
-
+                        <svg data-dc-tpl="102" width="16" height="12" viewBox="0 0 16 12" fill="none"><path data-dc-tpl="103" d="M1.5 2h13M1.5 6h13M1.5 10h9" stroke="white" stroke-width="1.8" stroke-linecap="round"></path></svg>
+                        <label>asdf</label>
                     </div>
                     <div css={s.box}>
-
-                    </div>
+                        <svg data-dc-tpl="109" width="16" height="16" viewBox="0 0 16 16" fill="none"><circle data-dc-tpl="110" cx="8" cy="8" r="6.5" stroke="white" stroke-width="1.8"></circle><path data-dc-tpl="111" d="M4.5 8l2.5 2.5L11.5 5" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                        <label>asdf</label>
+                    </div> */}
                 </div>
                 <div css={s.listGroup}>
                     <header>
@@ -34,11 +48,31 @@ function Home() {
                         <TextButton>편집</TextButton>
                     </header>
                     <ul>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
+                        {
+                            categoriesQuery.isLoading
+                            ? <></>
+                            : categoriesQuery.data.body.map(category => (
+                                <li key={category.categoryId}>
+                                    <Link to={`/categories/${category.categoryName}/todos`}>
+                                        <div css={s.categoryIcon(category.categoryColor)}>{category.categoryIcon}</div>
+                                        <div css={s.categoryName}>{category.categoryName}</div>
+                                        <div css={s.categoryCount}>
+                                            <span>
+                                                {
+                                                    categoryNotCompletedCountQuery.isLoading || 
+                                                    categoryNotCompletedCountQuery.data.body
+                                                    .find(count => count.id === category.categoryId)
+                                                    .notCompletedCount || "0"
+                                                }
+                                            </span>
+                                            <svg data-dc-tpl="128" width="8" height="13" viewBox="0 0 8 13" fill="none" style={{"margin-left": "4px"}}><path data-dc-tpl="129" d="M1 1l6 5.5L1 12" stroke="#C7C7CC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                        </div>
+                                    </Link>
+                                </li>
+                            ))
+                        }
                     </ul>
+                    <TextButton>새로운 목록 추가</TextButton>
                 </div>
             </div>
         </div>

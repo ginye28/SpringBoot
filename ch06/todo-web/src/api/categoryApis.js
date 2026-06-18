@@ -1,0 +1,57 @@
+// import { axiosInstance } from "./axiosInstance";
+
+// export const getCategoriesRequest = async () => {
+//     try {
+//         const response = await axiosInstance.get("/api/categories");
+//         return response.data;
+//     } catch(error) {
+//         return error.response.data;
+//     }
+// }
+
+// export const getCategoryColorsAndIcons = async () => {
+//     try {
+//         const response = await axiosInstance.get("/api/categories/colors-icons");
+//         return response.data;
+//     } catch(error) {
+//         return error.response.data;
+//     }
+// }
+
+// export const getNotCompletedCount = async () => {
+//     try {
+//         const response = await axiosInstance.get("/api/categories/completion/not");
+//         return response.data;
+//     } catch(error) {
+//         return error.response.data;
+//     }
+// }
+
+import { axiosInstance } from "./axiosInstance"
+
+export const getCategoriesRequest = async () => {
+    try {
+        const response = await axiosInstance.get("/api/categories");
+        return response.data;
+    } catch(error) {
+        return error.response.data;
+    }
+}
+
+export const getCategoryColorsAndIcons = async () => {
+    try {
+        const response = await axiosInstance.get("/api/categories/colors-icons");
+        return response.data;
+    } catch(error) {
+        return error.response.data;
+    }
+}
+
+export const getNotCompletedCount = async () => {
+    try {
+        const response = await axiosInstance.get("/api/categories/count/completion/not");
+        return response.data;
+    } catch(error) {
+        return error.response.data;
+    }
+}
