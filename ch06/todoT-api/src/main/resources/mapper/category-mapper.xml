@@ -5,15 +5,17 @@
 
 <mapper namespace="com.korit.todoapi.mapper.CategoryMapper">
 
-    <resultMap id="CategoryIconResultMap" type="CategoryIcon" >
-        <id property="id" column="category_icon_id"/>
+    <resultMap id="CategoryIconResultMap" type="CategoryIcon">
+        <id property="id" column="category_icon_id" />
         <result property="icon" column="icon" />
     </resultMap>
-    <resultMap id="CategoryColorResultMap" type="CategoryColor" >
+
+    <resultMap id="CategoryColorResultMap" type="CategoryColor">
         <id property="id" column="category_color_id"/>
         <result property="color" column="color" />
     </resultMap>
-    <resultMap id="CategoryResultMap" type="Category" >
+
+    <resultMap id="CategoryResultMap" type="Category">
         <id property="id" column="category_id"/>
         <result property="userId" column="user_id" />
         <result property="name" column="name" />
@@ -25,19 +27,20 @@
 
     <insert id="insert" useGeneratedKeys="true" keyProperty="id">
         insert into categories values
-        ( default, #{userId}, #{name}, #{colorId}, #{iconId}, #{createdAt} )
+        (default, #{userId}, #{name}, #{colorId}, #{iconId}, #{createdAt})
     </insert>
 
     <update id="update">
         update
             categories
         set
-            name = #{name},
+            name = #[name},
             color_id = #{colorId},
             icon_id = #{iconId}
         where
             id = #{id}
     </update>
+
     <delete id="delete">
         delete
         from
@@ -61,6 +64,7 @@
         order by
             ctgr.id
     </select>
+
     <select id="selectById" resultType="Category">
         select
             id,
@@ -74,6 +78,7 @@
         where
             id = #{categoryId}
     </select>
+
     <select id="selectByNameAndUserId" resultType="Category">
         select
             id,
@@ -88,6 +93,7 @@
             name = #{name}
             and user_id = #{userId}
     </select>
+
     <select id="selectAllByUserId" resultMap="CategoryResultMap">
         select
             ctgr.id as category_id,
@@ -109,6 +115,7 @@
         where
             ctgr.user_id = #{userId}
     </select>
+
     <select id="selectAllCategoryColor" resultType="CategoryColor">
         select
             id,
@@ -118,7 +125,8 @@
         order by
             id
     </select>
-    <select id="selectAllCategoryIcon" resultType="CategoryColor">
+
+    <select id="selectAllCategoryIcon" resultType="CategoryIcon">
         select
             id,
             icon
@@ -127,4 +135,5 @@
         order by
             id
     </select>
+
 </mapper>

@@ -1,4 +1,3 @@
-import { Children } from "react";
 import { create } from "zustand";
 
 export const useBottomModalStore = create((set) => ({
@@ -12,7 +11,7 @@ export const useBottomModalStore = create((set) => ({
             set({ 
                 isOpen: false,
                 children: null,
-            })
+            });
         }
     },
 
