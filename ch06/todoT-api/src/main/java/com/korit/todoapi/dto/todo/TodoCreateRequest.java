@@ -4,6 +4,7 @@ import com.korit.todoapi.entity.Todo;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Data
@@ -28,6 +29,8 @@ public class TodoCreateRequest {
                 .dueTime(dueTime)
                 .priority(priority)
                 .isFlagged(isFlagged)
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
                 .build();
     }
 }
