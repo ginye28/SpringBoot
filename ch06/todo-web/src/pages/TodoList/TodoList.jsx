@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import { useTodoList } from "../../hooks/queries/useTodos";
 import * as s from "./styles";
 import { useCategories, useCategoryNotCompletedCount } from "../../hooks/queries/useCategory";
@@ -9,7 +9,6 @@ import { useTodoCompleteMutation } from "../../hooks/mutations/useTodo";
 import { useMe } from "../../hooks/queries/useUser";
 
 function TodoList() {
-    const navigate = useNavigate();
     const { categoryName } = useParams();   //path의 이름 (app.jsx)
     const meQuery = useMe();
     const categoriesQuery = useCategories();
@@ -43,12 +42,12 @@ function TodoList() {
     return(
         <div css={s.layout}>
             <Header>
-                <TextButton onClick={() => navigate("/")}>&lt; 홈</TextButton>
+                <TextButton>&lt; 홈</TextButton>
                 <h4>{category.categoryName}</h4>
                 <TextButton>...</TextButton>
             </Header>
             <main css={s.main}>
-                <div css={s.header}>
+                <div css={s.header(category.categoryColor)}>
                     <div>{category.categoryIcon}</div>
                     <div>
                         <div>{category.categoryName}</div>
@@ -60,7 +59,7 @@ function TodoList() {
                         notCompletedTodoList.map(todo => (
                             <li>
                                 <div>
-                                    <input type="checkBox" checked={todo.completed} onClick={() => handleCompleteOnClick(todo.completed, todo.todoId)}/>
+                                    <input type="checkBox" checked={todo.completed} onClick={() => handleCompleteOnClick(todo.completed, todo.todoId)} />
                                 </div>
                                 <div>
                                     <div>
@@ -79,10 +78,9 @@ function TodoList() {
                 <div>
                     완료됨 {completedCount}개
                 </div>
-                <div>
-                    <ul css={s.completedUl}>
+                <ul css={s.completedUl}>
                     {
-                        notCompletedTodoList.map(todo => (
+                        completedTodoList.map(todo => (
                             <li>
                                 <div>
                                     <input type="checkBox" checked={todo.completed} onClick={() => handleCompleteOnClick(todo.completed, todo.todoId)}/>
@@ -92,10 +90,6 @@ function TodoList() {
                         ))
                     }
                 </ul>
-                <div>
-                    <TextButton onClick={() => navigate(`/register?categoryId=${categoryId}`)}>새로운 할 일 추가</TextButton>
-                </div>
-                </div>
             </main>
         </div>
     )

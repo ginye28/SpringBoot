@@ -58,7 +58,7 @@ function Register() {
     const handleRegisterOnClick = () => {
         const newTodo = {
             ...todo,
-            useId: meQuery.data.body.useId,
+            userId: meQuery.data.body.userId,
         }
         todoRegisterMutation.mutateAsync(newTodo);
     }
@@ -196,7 +196,7 @@ function PriorityModal({priorities, todo, setTodo}) {
         <h3>우선순위 선택</h3>
         <ul>
             {
-                categories.map(p => (
+                priorities.map(p => (
                     <li key={p.id} css={s.selectedLi(todo.priority === p.id)} onClick={() => handleSelectOnClick(p.id)}>
                         <div css={s.modalListIcon(p.color)}>
                             {p.icon}

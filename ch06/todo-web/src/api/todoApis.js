@@ -20,7 +20,7 @@ export const getTodoList = async (data) => {
 
 export const updateCompletion = async (data) => {
     try {
-        const response = await axiosInstance.patch(`/api/todos${data.todoId}/complete`, data);
+        const response = await axiosInstance.patch(`/api/todos/${data.todoId}/complete`, data);
         return response.data;
     } catch(error) {
         return error.response.data;
